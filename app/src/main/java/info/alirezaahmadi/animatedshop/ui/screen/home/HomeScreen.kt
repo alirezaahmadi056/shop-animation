@@ -3,6 +3,8 @@ package info.alirezaahmadi.animatedshop.ui.screen.home
 import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionScope
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -15,5 +17,10 @@ fun HomeScreen(
     sharedTransitionScope: SharedTransitionScope,
     animatedContentScope: AnimatedContentScope
 ) {
-Text("dsgjbudgiu")
+    LazyColumn(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        item { SliderSection() }
+    }
+
 }
