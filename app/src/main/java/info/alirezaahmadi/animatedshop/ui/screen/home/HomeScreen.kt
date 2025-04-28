@@ -23,13 +23,15 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import info.alirezaahmadi.animatedshop.R
 import info.alirezaahmadi.animatedshop.navigation.Routes
+import info.alirezaahmadi.animatedshop.viewModel.MainViewModel
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun HomeScreen(
     navHostController: NavHostController,
     sharedTransitionScope: SharedTransitionScope,
-    animatedContentScope: AnimatedContentScope
+    animatedContentScope: AnimatedContentScope,
+    mainViewModel: MainViewModel
 ) {
     LazyColumn(
         modifier = Modifier.fillMaxSize()

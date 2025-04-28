@@ -10,11 +10,13 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import info.alirezaahmadi.animatedshop.ui.screen.detail.ProductDetailScreen
 import info.alirezaahmadi.animatedshop.ui.screen.home.HomeScreen
+import info.alirezaahmadi.animatedshop.viewModel.MainViewModel
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun NavGraph(
-    modifier: Modifier
+    modifier: Modifier,
+    mainViewModel: MainViewModel
 ) {
     SharedTransitionLayout {
         val navHostController = rememberNavController()
@@ -26,6 +28,7 @@ fun NavGraph(
             composable<Routes.HomeScreen> {
                 HomeScreen(
                 navHostController  =  navHostController,
+                    mainViewModel =mainViewModel,
                     sharedTransitionScope = this@SharedTransitionLayout,
                     animatedContentScope = this@composable
                 )
@@ -36,6 +39,7 @@ fun NavGraph(
                     navHostController = navHostController,
                     image = args.image,
                     name = args.name,
+                    mainViewModel =mainViewModel,
                     sharedTransitionScope = this@SharedTransitionLayout,
                     animatedContentScope = this@composable
                 )

@@ -15,15 +15,17 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import info.alirezaahmadi.animatedshop.viewModel.MainViewModel
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun ProductDetailScreen(
     navHostController: NavHostController,
-    image:Int,
-    name:String,
+    image: Int,
+    name: String,
     sharedTransitionScope: SharedTransitionScope,
-    animatedContentScope: AnimatedContentScope
+    animatedContentScope: AnimatedContentScope,
+    mainViewModel: MainViewModel
 ) {
     with(sharedTransitionScope) {
         Column(
