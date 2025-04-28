@@ -7,6 +7,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
+import info.alirezaahmadi.animatedshop.ui.screen.detail.ProductDetailScreen
 import info.alirezaahmadi.animatedshop.ui.screen.home.HomeScreen
 
 @OptIn(ExperimentalSharedTransitionApi::class)
@@ -24,6 +26,16 @@ fun NavGraph(
             composable<Routes.HomeScreen> {
                 HomeScreen(
                 navHostController  =  navHostController,
+                    sharedTransitionScope = this@SharedTransitionLayout,
+                    animatedContentScope = this@composable
+                )
+            }
+            composable<Routes.ProductDetailScreen> {
+                val args =it.toRoute<Routes.ProductDetailScreen>()
+                ProductDetailScreen(
+                    navHostController = navHostController,
+                    image = args.image,
+                    name = args.name,
                     sharedTransitionScope = this@SharedTransitionLayout,
                     animatedContentScope = this@composable
                 )

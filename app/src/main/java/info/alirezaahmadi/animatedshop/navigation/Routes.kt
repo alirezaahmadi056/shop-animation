@@ -6,4 +6,10 @@ sealed interface Routes {
 
     @Serializable
     data object HomeScreen
+
+    @Serializable
+    data class ProductDetailScreen(
+        val image:Int,
+        val name:String,
+    )
 }
