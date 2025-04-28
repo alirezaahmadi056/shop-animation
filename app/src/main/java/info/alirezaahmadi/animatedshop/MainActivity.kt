@@ -7,12 +7,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLayoutDirection
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.LayoutDirection
 import info.alirezaahmadi.animatedshop.navigation.NavGraph
 import info.alirezaahmadi.animatedshop.ui.theme.AnimatedShopTheme
@@ -24,7 +22,10 @@ class MainActivity : ComponentActivity() {
         setContent {
             AnimatedShopTheme {
                 CompositionLocalProvider( LocalLayoutDirection provides LayoutDirection.Rtl) {
-                    Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    Scaffold(
+                        modifier = Modifier.fillMaxSize(),
+                        containerColor = Color(0xffFCF3EC)
+                    ) { innerPadding ->
                         NavGraph(
                             modifier = Modifier.fillMaxSize()
                                 .padding(innerPadding)
