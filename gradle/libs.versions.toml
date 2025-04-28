@@ -12,6 +12,12 @@ composeNavigation="2.8.9"
 materialIconsExtended = "1.7.8"
 jetJson= "1.7.3"
 
+ksp ="2.0.21-1.0.26"
+roomKtx = "2.7.1"
+
+googleHiltAndroid = "2.52"
+hiltNavigationCompose = "1.2.0"
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -32,10 +38,19 @@ androidx-material-icons-extended = { module = "androidx.compose.material:materia
 compose-navigation ={module ="androidx.navigation:navigation-compose",version.ref ="composeNavigation"}
 jetbrains-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "jetJson" }
 
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomKtx" }
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomKtx" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomKtx" }
+
+google-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "googleHiltAndroid" }
+hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "googleHiltAndroid" }
+androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+ksp-plugin = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "googleHiltAndroid" }
 

@@ -3,6 +3,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.ksp.plugin)
+    alias(libs.plugins.dagger.hilt)
 }
 
 android {
@@ -64,5 +66,13 @@ dependencies {
     implementation(libs.jetbrains.json)
     //icon
     implementation(libs.androidx.material.icons.extended)
+    //hilt
+    implementation(libs.google.hilt.android)
+    ksp(libs.hilt.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
 
+    // Room
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
 }
