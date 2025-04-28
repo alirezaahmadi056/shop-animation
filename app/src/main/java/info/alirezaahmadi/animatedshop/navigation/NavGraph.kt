@@ -4,6 +4,7 @@ import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionLayout
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -19,10 +20,10 @@ import info.alirezaahmadi.animatedshop.viewModel.MainViewModel
 @Composable
 fun NavGraph(
     modifier: Modifier,
+    navHostController: NavHostController,
     mainViewModel: MainViewModel
 ) {
     SharedTransitionLayout {
-        val navHostController = rememberNavController()
         NavHost(
             modifier = modifier,
             navController = navHostController,
@@ -58,7 +59,7 @@ fun NavGraph(
             composable<Routes.ShoppingCartScreen> {
                 ShoppingCartScreen(navHostController)
             }
-            composable<Routes.ShoppingCartScreen> {
+            composable<Routes.ProfileScreen> {
                 ProfileScreen(navHostController)
             }
 
