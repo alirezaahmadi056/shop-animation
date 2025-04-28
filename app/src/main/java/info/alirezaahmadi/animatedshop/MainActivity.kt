@@ -12,9 +12,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.LayoutDirection
+import dagger.hilt.android.AndroidEntryPoint
 import info.alirezaahmadi.animatedshop.navigation.NavGraph
 import info.alirezaahmadi.animatedshop.ui.theme.AnimatedShopTheme
-
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
