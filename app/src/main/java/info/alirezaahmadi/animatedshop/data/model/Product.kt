@@ -1,6 +1,7 @@
 package info.alirezaahmadi.animatedshop.data.model
 
 import info.alirezaahmadi.animatedshop.R
+import info.alirezaahmadi.animatedshop.data.db.entity.FavoriteEntity
 
 data class Product(
     val id: Int,
@@ -11,7 +12,11 @@ data class Product(
     val image: Int,
     val rating: Float,
     val features: List<String>
-)
+){
+    fun convertToFavoriteItem():FavoriteEntity{
+        return  FavoriteEntity(id, title, description, price, discountPercent, image, rating, features)
+    }
+}
 
 data class Category(
     val id: Int,
@@ -42,7 +47,7 @@ data class Category(
                         description = "تی‌شرت خنک تابستانی.",
                         price = 220_000L,
                         discountPercent = 5,
-                        image = R.drawable.img_shirt,
+                        image = R.drawable.img_shirt6,
                         rating = 4.4f,
                         features = listOf("طرح فانتزی", "رنگ‌بندی متنوع")
                     )
