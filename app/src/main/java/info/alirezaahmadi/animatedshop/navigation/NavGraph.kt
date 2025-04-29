@@ -7,7 +7,6 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import info.alirezaahmadi.animatedshop.ui.screen.category.CategoryScreen
 import info.alirezaahmadi.animatedshop.ui.screen.detail.ProductDetailScreen
@@ -41,8 +40,14 @@ fun NavGraph(
                 val args = it.toRoute<Routes.ProductDetailScreen>()
                 ProductDetailScreen(
                     navHostController = navHostController,
+                    id =args.id,
                     image = args.image,
-                    name = args.name,
+                    title = args.title,
+                    description = args.description,
+                    price = args.price,
+                    rating = args.rating,
+                    features = args.features,
+                    discountPercent = args.discountPercent,
                     mainViewModel = mainViewModel,
                     sharedTransitionScope = this@SharedTransitionLayout,
                     animatedContentScope = this@composable

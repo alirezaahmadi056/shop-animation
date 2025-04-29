@@ -57,8 +57,14 @@ fun ProductItemCard(
                 .clickable {
                     navHostController.navigate(
                         Routes.ProductDetailScreen(
-                            name = product.title,
-                            image = product.image
+                            id = product.id,
+                            image = product.image,
+                            title = product.title,
+                            description = product.description,
+                            price = product.price,
+                            rating = product.rating,
+                            features = product.features,
+                            discountPercent = product.discountPercent,
                         )
                     )
                 },
@@ -99,7 +105,9 @@ fun ProductItemCard(
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                         modifier = Modifier.sharedElement(
-                          sharedContentState =   sharedTransitionScope.rememberSharedContentState(key = "text-${product.title}"),
+                            sharedContentState = sharedTransitionScope.rememberSharedContentState(
+                                key = "text-${product.title}"
+                            ),
                             animatedVisibilityScope = animatedContentScope,
                         )
                     )
