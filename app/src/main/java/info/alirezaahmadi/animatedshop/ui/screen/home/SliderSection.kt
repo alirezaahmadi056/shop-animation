@@ -50,7 +50,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun SliderSection() {
     val pagerState = rememberPagerState(initialPage = 2) { 5 }
-    val scope= rememberCoroutineScope()
+    val scope = rememberCoroutineScope()
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -66,8 +66,21 @@ fun SliderSection() {
                 tabSize = pagerState.pageCount,
                 page = page,
                 scrollBack = {
-                    scope.launch { pagerState.animateScrollToPage(page =page-1, animationSpec = tween(650)) } },
-                scrollNext = { scope.launch { pagerState.animateScrollToPage(page =page+1, animationSpec = tween(650)) } }
+                    scope.launch {
+                        pagerState.animateScrollToPage(
+                            page = page - 1,
+                            animationSpec = tween(650)
+                        )
+                    }
+                },
+                scrollNext = {
+                    scope.launch {
+                        pagerState.animateScrollToPage(
+                            page = page + 1,
+                            animationSpec = tween(650)
+                        )
+                    }
+                }
             )
         }
         Row(
@@ -92,7 +105,7 @@ private fun SliderItem(
     scrollNext: () -> Unit,
     scrollBack: () -> Unit
 ) {
-    val enableNext = remember(key1 = tabSize, key2 = page) { tabSize > page+1 }
+    val enableNext = remember(key1 = tabSize, key2 = page) { tabSize > page + 1 }
     val enableBack = remember(key1 = page) { page > 0 }
     Box(
         modifier = Modifier
@@ -185,7 +198,22 @@ private fun SliderItem(
             }
         }
 
-
+        Box(
+            modifier = Modifier
+                .align(Alignment.TopEnd)
+                .padding(end = 40.dp)
+                .clip(RoundedCornerShape(12.dp))
+                .background(Brush.linearGradient(listOf(Color(0xffFD583D),Color(0xffE32A0D)))),
+            contentAlignment = Alignment.Center
+        ){
+            Text(
+                text = "تخفیف ویژه",
+                style = MaterialTheme.typography.titleSmall,
+                fontWeight = FontWeight.Bold,
+                color = Color.White,
+                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+            )
+        }
     }
 
 }
