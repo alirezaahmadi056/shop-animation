@@ -4,15 +4,24 @@ import androidx.compose.animation.AnimatedContentScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import info.alirezaahmadi.animatedshop.viewModel.MainViewModel
@@ -28,9 +37,16 @@ fun ProductDetailScreen(
     mainViewModel: MainViewModel
 ) {
     with(sharedTransitionScope) {
+    Scaffold(
+        containerColor = Color(0xffEBEBEB)
+    ) { innerPadding ->
         Column(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Spacer(Modifier.height(15.dp))
             Image(
                 painter = painterResource(image),
                 contentDescription = "",
@@ -40,20 +56,18 @@ fun ProductDetailScreen(
                         sharedContentState = sharedTransitionScope.rememberSharedContentState(key = "image-$image"),
                         animatedVisibilityScope = animatedContentScope,
                     )
+                    .fillMaxWidth(0.8f)
+            )
+            ProductDetailHeaderSection(modifier = Modifier.align(Alignment.End))
+        Column(
+            modifier = Modifier.fillMaxWidth()
+                .height(250.dp)
+                .background(Color.White)
+        ) {
 
-                    .aspectRatio(1f)
-                    .fillMaxWidth()
-            )
-            Text(
-                text = name, fontSize = 18.sp,
-                modifier =
-                Modifier
-                    .sharedElement(
-                        sharedTransitionScope.rememberSharedContentState(key = "text-${name}"),
-                        animatedVisibilityScope = animatedContentScope
-                    )
-                    .fillMaxWidth()
-            )
+        }
+        }
+
         }
     }
 }
