@@ -12,7 +12,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -63,7 +65,8 @@ fun ProductDetailScreen(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(innerPadding),
+                    .padding(innerPadding)
+                    .verticalScroll(rememberScrollState()),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Spacer(Modifier.height(15.dp))
@@ -116,13 +119,14 @@ fun ProductDetailScreen(
                     Text(
                         text =title,
                         style = MaterialTheme.typography.titleLarge,
-                        fontWeight = FontWeight.SemiBold,
+                        fontWeight = FontWeight.Bold,
                         color = Color.Black,
                         modifier = Modifier.fillMaxWidth().sharedElement(
                             sharedContentState = sharedTransitionScope.rememberSharedContentState(key = "text-${title}"),
                             animatedVisibilityScope =animatedContentScope
                         )
                     )
+                    PagerInfoProduct()
 
                 }
             }
