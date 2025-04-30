@@ -3,6 +3,7 @@ package info.alirezaahmadi.animatedshop.viewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import info.alirezaahmadi.animatedshop.data.db.entity.FavoriteEntity
 import info.alirezaahmadi.animatedshop.data.db.entity.ShoppingEntity
 import info.alirezaahmadi.animatedshop.data.model.Category
 import info.alirezaahmadi.animatedshop.repository.MainRepository
@@ -25,6 +26,7 @@ class MainViewModel @Inject constructor(
     init {
         viewModelScope.launch(Dispatchers.IO) { _allCategory.emit(repository.getAllCategory()) }
     }
+
     //shopping
     fun upsertShoppingItem(shoppingEntity: ShoppingEntity) {
         viewModelScope.launch(Dispatchers.IO) { repository.upsertShoppingItem(shoppingEntity) }
@@ -53,5 +55,20 @@ class MainViewModel @Inject constructor(
 
     fun isHaveItemToCart(itemId: Int): Flow<Boolean> = repository.isHaveItemToCart(itemId)
 
+    //favorite
+     fun upsertFavoriteItem(favoriteEntity: FavoriteEntity){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.upsertFavoriteItem(favoriteEntity)
+        }
+    }
 
+     fun deletedFavoriteItem(itemId: Int){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deletedFavoriteItem(itemId)
+        }
+
+    }
+
+    fun isFavorite(itemId: Int): Flow<Boolean> =repository.isFavorite(itemId)
+    fun getAllFavorite(): Flow<List<FavoriteEntity>> =repository.getAllFavorite()
 }
