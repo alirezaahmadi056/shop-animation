@@ -17,7 +17,6 @@ sealed interface Routes {
         val discountPercent: Int,
         val image: Int,
         val rating: Float,
-        val features: List<String>
     ) : Routes
 
     @Serializable
