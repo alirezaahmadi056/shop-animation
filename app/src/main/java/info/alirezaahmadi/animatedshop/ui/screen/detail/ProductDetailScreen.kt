@@ -11,13 +11,17 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import info.alirezaahmadi.animatedshop.data.model.Product
@@ -34,11 +38,19 @@ fun ProductDetailScreen(
     discountPercent: Int,
     image: Int,
     rating: Float,
-    features: List<String>,
     sharedTransitionScope: SharedTransitionScope,
     animatedContentScope: AnimatedContentScope,
     mainViewModel: MainViewModel
 ) {
+    val singleProduct =Product(
+        id =id,
+        title= title,
+        description=description,
+        price= price,
+        discountPercent= discountPercent,
+        image=image,
+        rating=rating,
+    )
     with(sharedTransitionScope) {
         Scaffold(
             containerColor = Color(0xffEBEBEB)
@@ -63,13 +75,28 @@ fun ProductDetailScreen(
                         )
                         .fillMaxWidth(0.8f)
                 )
-                ProductDetailHeaderSection(modifier = Modifier.align(Alignment.End))
+                ProductDetailHeaderSection(
+                    modifier = Modifier.align(Alignment.End),
+                    product = singleProduct,
+                    mainViewModel = mainViewModel
+                )
                 Column(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .height(250.dp)
+                        .fillMaxSize()
                         .background(Color.White)
+                        .padding(horizontal = 12.dp)
                 ) {
+                    Spacer(Modifier.height(12.dp))
+                    Text(
+                        text =title,
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.SemiBold,
+                        color = Color.Black,
+                        modifier = Modifier.fillMaxWidth().sharedElement(
+                            sharedContentState = sharedTransitionScope.rememberSharedContentState(key = "text-${title}"),
+                            animatedVisibilityScope =animatedContentScope
+                        )
+                    )
 
                 }
             }

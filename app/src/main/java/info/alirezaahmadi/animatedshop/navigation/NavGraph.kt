@@ -46,7 +46,6 @@ fun NavGraph(
                     description = args.description,
                     price = args.price,
                     rating = args.rating,
-                    features = args.features,
                     discountPercent = args.discountPercent,
                     mainViewModel = mainViewModel,
                     sharedTransitionScope = this@SharedTransitionLayout,
