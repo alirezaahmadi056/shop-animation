@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -27,6 +28,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import info.alirezaahmadi.animatedshop.R
 import info.alirezaahmadi.animatedshop.navigation.Routes
+import info.alirezaahmadi.animatedshop.ui.component.ProductItemCard
 import info.alirezaahmadi.animatedshop.viewModel.MainViewModel
 
 @OptIn(ExperimentalSharedTransitionApi::class)
@@ -45,36 +47,16 @@ fun HomeScreen(
         item{ Spacer(Modifier.height(15.dp)) }
         item { HomeCategorySection(categoryList = allCategory)  }
         item {
-            with(sharedTransitionScope) {
-                Row(
-                    Modifier
-                        .fillMaxWidth()
-                        .clickable { navHostController.navigate(Routes.ProductDetailScreen(name = "loli", image = R.drawable.polo_shirt)) }
-                ) {
-                    Image(
-                        painterResource(id = R.drawable.polo_shirt),
-                        contentDescription = "",
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier
-                            .sharedElement(
-                                sharedTransitionScope.rememberSharedContentState(key = "image-${R.drawable.polo_shirt}"),
-                                animatedVisibilityScope = animatedContentScope
-                            )
-                            .size(100.dp)
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text(
-                        text = "loli", fontSize = 18.sp,
-                        modifier = Modifier
-                            .align(Alignment.CenterVertically)
-                            .sharedElement(
-                                sharedTransitionScope.rememberSharedContentState(key = "text-loli"),
-                                animatedVisibilityScope = animatedContentScope,
-                            )
+            LazyRow {
+                items(allCategory[0].products){
+                    ProductItemCard(
+                        product = it,
+                        navHostController=navHostController,
+                        sharedTransitionScope = sharedTransitionScope,
+                        animatedContentScope = animatedContentScope
                     )
                 }
             }
-
         }
     }
 
