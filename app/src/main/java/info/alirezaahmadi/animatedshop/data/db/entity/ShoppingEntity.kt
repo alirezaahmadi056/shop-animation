@@ -13,6 +13,5 @@ data class ShoppingEntity(
     val discountPercent: Int,
     val image: Int,
     val rating: Float,
-    val features: List<String>,
     val count:Int
 )
