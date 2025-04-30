@@ -63,7 +63,6 @@ fun ProductItemCard(
                             description = product.description,
                             price = product.price,
                             rating = product.rating,
-                            features = product.features,
                             discountPercent = product.discountPercent,
                         )
                     )
