@@ -8,6 +8,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import info.alirezaahmadi.animatedshop.data.db.AppDatBase
+import info.alirezaahmadi.animatedshop.data.db.dao.FavoriteDao
 import info.alirezaahmadi.animatedshop.data.db.dao.ShoppingDao
 import javax.inject.Singleton
 
@@ -18,17 +19,25 @@ object DataBaseModule {
     @Provides
     @Singleton
     fun provideDataBase(
-       @ApplicationContext context: Context
-    ) :AppDatBase{
+        @ApplicationContext context: Context
+    ): AppDatBase {
         return Room.databaseBuilder(
             context = context,
             name = "my_dp",
             klass = AppDatBase::class.java
         ).build()
     }
+
     @Provides
     @Singleton
-    fun provideShoppingDao(appDatBase: AppDatBase):ShoppingDao{
+    fun provideShoppingDao(appDatBase: AppDatBase): ShoppingDao {
         return appDatBase.ShoppingDao()
     }
+
+    @Provides
+    @Singleton
+    fun provideFavoriteDao(appDatBase: AppDatBase): FavoriteDao {
+        return appDatBase.FavoriteDao()
+    }
+
 }
