@@ -4,8 +4,10 @@ import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Bookmark
@@ -38,12 +40,13 @@ fun ProductDetailHeaderSection(
     val isHaveFavorite by mainViewModel.isFavorite(itemId = product.id).collectAsState(false)
     Row(
         modifier = modifier
-            .clip(RoundedCornerShape(topStart = 22.dp, topEnd = 22.dp))
+            .clip(RoundedCornerShape(topStart = 45.dp, topEnd = 22.dp))
             .background(Color.White)
-            .padding(8.dp),
+            .padding(top = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(3.dp)
     ) {
+        Spacer(Modifier.width(12.dp))
         IconButton(
             onClick = {}
         ) {
