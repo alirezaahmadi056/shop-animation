@@ -79,6 +79,7 @@ private fun SingleTab(
             .padding(horizontal = 2.dp)
             .clip(RoundedCornerShape(20.dp))
             .border(1.dp, color = boarderColor, shape = RoundedCornerShape(20.dp))
+            .background(Color(0xffF8F7F7))
             .clickable(onClick = onSelected),
         contentAlignment = Alignment.Center
     ) {
