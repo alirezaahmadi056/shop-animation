@@ -2,6 +2,7 @@ package info.alirezaahmadi.animatedshop.data.model
 
 import info.alirezaahmadi.animatedshop.R
 import info.alirezaahmadi.animatedshop.data.db.entity.FavoriteEntity
+import info.alirezaahmadi.animatedshop.data.db.entity.ShoppingEntity
 
 data class Product(
     val id: Int,
@@ -13,6 +14,9 @@ data class Product(
 ){
     fun convertToFavoriteItem():FavoriteEntity{
         return  FavoriteEntity(id, title,price, discountPercent, image, rating)
+    }
+    fun convertToShoppingItem(count:Int):ShoppingEntity{
+        return  ShoppingEntity(id, title,price, discountPercent, image, rating, count = count)
     }
 }
 
