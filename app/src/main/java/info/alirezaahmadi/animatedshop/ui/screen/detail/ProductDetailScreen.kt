@@ -51,13 +51,13 @@ fun ProductDetailScreen(
     animatedContentScope: AnimatedContentScope,
     mainViewModel: MainViewModel
 ) {
-    val singleProduct =Product(
-        id =id,
-        title= title,
-        price= price,
-        discountPercent= discountPercent,
-        image=image,
-        rating=rating,
+    val singleProduct = Product(
+        id = id,
+        title = title,
+        price = price,
+        discountPercent = discountPercent,
+        image = image,
+        rating = rating,
     )
     val tabNames = listOf(
         "توضیحات",
@@ -70,7 +70,13 @@ fun ProductDetailScreen(
 
     with(sharedTransitionScope) {
         Scaffold(
-            containerColor = Color(0xffEBEBEB)
+            containerColor = Color(0xffEBEBEB),
+            bottomBar = {
+                ProductDetailBottomBar(
+                    product = singleProduct,
+                    mainViewModel = mainViewModel
+                )
+            }
         ) { innerPadding ->
             Column(
                 modifier = Modifier
@@ -80,10 +86,11 @@ fun ProductDetailScreen(
             ) {
                 Spacer(Modifier.height(15.dp))
                 Box(
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
                         .padding(top = 15.dp),
                     contentAlignment = Alignment.Center
-                ){
+                ) {
                     Image(
                         painter = painterResource(image),
                         contentDescription = "",
@@ -98,11 +105,19 @@ fun ProductDetailScreen(
                             .fillMaxWidth(0.8f)
                     )
                     Box(
-                        modifier = Modifier.align(Alignment.TopStart)
+                        modifier = Modifier
+                            .align(Alignment.TopStart)
                             .clip(RoundedCornerShape(topEnd = 12.dp, bottomEnd = 12.dp))
-                            .background(Brush.linearGradient(listOf(Color(0xffFD583D),Color(0xffE32A0D),))),
+                            .background(
+                                Brush.linearGradient(
+                                    listOf(
+                                        Color(0xffFD583D),
+                                        Color(0xffE32A0D),
+                                    )
+                                )
+                            ),
                         contentAlignment = Alignment.Center
-                    ){
+                    ) {
                         Text(
                             text = "$discountPercent%".byLocate(),
                             style = MaterialTheme.typography.titleMedium,
@@ -113,11 +128,11 @@ fun ProductDetailScreen(
                     }
                 }
                 ProductDetailHeaderSection(
-                    modifier =Modifier.align(Alignment.End) ,
+                    modifier = Modifier.align(Alignment.End),
                     product = singleProduct,
                     mainViewModel = mainViewModel
                 )
-                LazyColumn (
+                LazyColumn(
                     modifier = Modifier
                         .background(Color.White)
                         .fillMaxSize(),
@@ -127,14 +142,19 @@ fun ProductDetailScreen(
                     item { Spacer(Modifier.height(25.dp)) }
                     item {
                         Text(
-                            text =title,
+                            text = title,
                             style = MaterialTheme.typography.titleLarge,
                             fontWeight = FontWeight.Bold,
                             color = Color.Black,
-                            modifier = Modifier.fillMaxWidth().align(Alignment.End).sharedElement(
-                                sharedContentState = sharedTransitionScope.rememberSharedContentState(key = "text-${title}"),
-                                animatedVisibilityScope =animatedContentScope
-                            )
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .align(Alignment.End)
+                                .sharedElement(
+                                    sharedContentState = sharedTransitionScope.rememberSharedContentState(
+                                        key = "text-${title}"
+                                    ),
+                                    animatedVisibilityScope = animatedContentScope
+                                )
                                 .background(Color.White)
                         )
                     }
@@ -144,10 +164,12 @@ fun ProductDetailScreen(
                             tabs = tabNames
                         )
                     }
-                    item { PagerInfoProduct(
-                        pagerState = pagerState,
-                        tabNames = tabNames
-                    ) }
+                    item {
+                        PagerInfoProduct(
+                            pagerState = pagerState,
+                            tabNames = tabNames
+                        )
+                    }
                 }
             }
 
