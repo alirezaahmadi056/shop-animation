@@ -44,6 +44,12 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    fun deletedShoppingItemByID(productId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deletedShoppingItemByID(productId)
+        }
+    }
+
     fun updateShoppingItemCount(
         itemId: Int,
         newCount: Int,
@@ -54,21 +60,22 @@ class MainViewModel @Inject constructor(
     }
 
     fun isHaveItemToCart(itemId: Int): Flow<Boolean> = repository.isHaveItemToCart(itemId)
+    fun getShoppingCountById(itemId: Int): Flow<Int> = repository.getShoppingCountById(itemId)
 
     //favorite
-     fun upsertFavoriteItem(favoriteEntity: FavoriteEntity){
+    fun upsertFavoriteItem(favoriteEntity: FavoriteEntity) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.upsertFavoriteItem(favoriteEntity)
         }
     }
 
-     fun deletedFavoriteItem(itemId: Int){
+    fun deletedFavoriteItem(itemId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.deletedFavoriteItem(itemId)
         }
 
     }
 
-    fun isFavorite(itemId: Int): Flow<Boolean> =repository.isFavorite(itemId)
-    fun getAllFavorite(): Flow<List<FavoriteEntity>> =repository.getAllFavorite()
+    fun isFavorite(itemId: Int): Flow<Boolean> = repository.isFavorite(itemId)
+    fun getAllFavorite(): Flow<List<FavoriteEntity>> = repository.getAllFavorite()
 }

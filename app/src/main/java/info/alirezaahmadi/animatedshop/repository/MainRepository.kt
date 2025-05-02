@@ -34,7 +34,9 @@ class MainRepository @Inject constructor(
     suspend fun deletedShoppingItem(shoppingEntity: ShoppingEntity) {
         shoppingDao.deletedShoppingItem(shoppingEntity)
     }
-
+    suspend fun deletedShoppingItemByID(productId:Int){
+        shoppingDao.deletedShoppingItemByID(productId)
+    }
     suspend fun updateShoppingItemCount(
         itemId: Int,
         newCount: Int,
@@ -43,7 +45,7 @@ class MainRepository @Inject constructor(
     }
 
     fun isHaveItemToCart(itemId: Int): Flow<Boolean> = shoppingDao.isHasIsCart(itemId)
-
+    fun getShoppingCountById(itemId: Int): Flow<Int> =shoppingDao.getShoppingCountById(itemId)
 
     //favorite
 

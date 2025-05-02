@@ -21,12 +21,18 @@ interface ShoppingDao {
     @Delete
     suspend fun deletedShoppingItem(shoppingEntity: ShoppingEntity)
 
+    @Query("delete from shoppingentity where id=:productId")
+    suspend fun deletedShoppingItemByID(productId:Int)
+
     @Query("update ShoppingEntity set count=:newCount where id=:itemId")
     suspend fun updateCount(
         itemId: Int,
         newCount: Int,
     )
+
     @Query("select exists(select * from ShoppingEntity where id=:itemId) ")
     fun isHasIsCart(itemId: Int): Flow<Boolean>
 
+    @Query("select count from ShoppingEntity where id=:itemId")
+    fun getShoppingCountById(itemId: Int): Flow<Int>
 }
