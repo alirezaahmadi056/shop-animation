@@ -68,10 +68,9 @@ fun AppTopBar(
                 )
             }
             IconButton(onClick = {}) {
-                Icon(
+                Image(
                     painter = painterResource(R.drawable.notification),
                     contentDescription = "",
-                    tint = Color(0xffEF472C),
                     modifier = Modifier.size(23.dp)
                 )
 
