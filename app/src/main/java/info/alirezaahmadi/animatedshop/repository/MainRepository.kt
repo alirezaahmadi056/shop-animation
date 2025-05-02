@@ -1,8 +1,5 @@
 package info.alirezaahmadi.animatedshop.repository
 
-import androidx.room.Delete
-import androidx.room.Query
-import androidx.room.Upsert
 import info.alirezaahmadi.animatedshop.data.db.dao.FavoriteDao
 import info.alirezaahmadi.animatedshop.data.db.dao.ShoppingDao
 import info.alirezaahmadi.animatedshop.data.db.entity.FavoriteEntity
