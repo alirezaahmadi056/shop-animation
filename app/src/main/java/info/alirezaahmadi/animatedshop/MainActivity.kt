@@ -14,12 +14,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.LayoutDirection
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import info.alirezaahmadi.animatedshop.navigation.BottomNavigation
 import info.alirezaahmadi.animatedshop.navigation.NavGraph
+import info.alirezaahmadi.animatedshop.ui.component.AppTopBar
 import info.alirezaahmadi.animatedshop.ui.theme.AnimatedShopTheme
 import info.alirezaahmadi.animatedshop.viewModel.MainViewModel
 
@@ -41,7 +41,8 @@ class MainActivity : ComponentActivity() {
                         containerColor = Color(0xffFCF3EC),
                         bottomBar = {
                             BottomNavigation(navHostController = navHostController)
-                        }
+                        },
+                        topBar = {AppTopBar(navHostController=navHostController)}
                     ) { innerPadding ->
                         NavGraph(
                             mainViewModel = mainViewModel,
