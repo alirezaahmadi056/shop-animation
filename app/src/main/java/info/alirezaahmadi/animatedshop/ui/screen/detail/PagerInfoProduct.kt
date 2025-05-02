@@ -35,25 +35,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import info.alirezaahmadi.animatedshop.util.byLocate
 import kotlinx.coroutines.launch
 
 @Composable
-fun PagerInfoProduct() {
+fun PagerInfoProduct(
+    pagerState: PagerState,
+    tabNames:List<String>
+) {
 
-    val tabNames = listOf(
-        "توضیحات",
-        "ویژگی ها",
-        "نظرات",
-        "محصولات مشابه",
-    )
-
-    val pagerState = rememberPagerState { tabNames.size }
-    TabsIndicator(
-        pagerState = pagerState,
-        tabs = tabNames
-    )
     HorizontalPager(
         state = pagerState,
         modifier = Modifier.fillMaxSize(),
@@ -61,85 +53,17 @@ fun PagerInfoProduct() {
         key = { tabNames[it] },
         pageSpacing = 12.dp
     ) { page ->
-     /*   Text(
-            text =
-            "${tabNames[page]}\n\n" +
-                    "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می طلبد، تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی ایجاد کرد",
-            style = MaterialTheme.typography.bodyLarge,
-            color = Color.Black,
-            fontWeight = FontWeight.SemiBold
-        )*/
-        CommentsSection()
-    }
-
-}
-
-@Composable
-private fun TabsIndicator(
-    pagerState: PagerState,
-    tabs: List<String>
-) {
-    val scope = rememberCoroutineScope()
-    ScrollableTabRow(
-        selectedTabIndex = pagerState.currentPage,
-        edgePadding = 4.dp,
-        containerColor = Color.White,
-        indicator = {},
-        divider = {},
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 12.dp)
-    ) {
-        tabs.forEachIndexed { index, text ->
-            SingleTab(
-                name = text,
-                selected = pagerState.currentPage == index
-            ) {
-                scope.launch {
-                    pagerState.animateScrollToPage(
-                        page = index,
-                        animationSpec = tween(550)
-                    )
-                }
-            }
+        when (page) {
+            0 -> DescriptionSection()
+            1 -> FeatureSection()
+            2 -> CommentsSection()
+            3 -> SimilarProductsSection()
+            else -> CommentsSection()
         }
     }
+
 }
 
-@Composable
-private fun SingleTab(
-    name: String,
-    selected: Boolean,
-    onSelected: () -> Unit
-) {
-    val boarderColor by animateColorAsState(
-        targetValue = if (selected) Color(0xffEF472C)
-        else Color.White,
-        label = ""
-    )
-    val textColor by animateColorAsState(
-        targetValue = if (selected) Color(0xffEF472C)
-        else Color.DarkGray,
-        label = ""
-    )
-
-    Box(
-        modifier = Modifier
-            .padding(horizontal = 2.dp)
-            .clip(RoundedCornerShape(20.dp))
-            .border(1.dp, color = boarderColor, shape = RoundedCornerShape(20.dp))
-            .clickable(onClick = onSelected),
-        contentAlignment = Alignment.Center
-    ) {
-        Text(
-            text = name,
-            style = MaterialTheme.typography.titleMedium,
-            fontWeight = FontWeight.SemiBold,
-            color = textColor,
-            modifier = Modifier.padding(vertical = 8.dp, horizontal = 10.dp)
-        )
-    }
-}
 
 @Composable
 private fun DescriptionSection() {
@@ -148,10 +72,17 @@ private fun DescriptionSection() {
     ) {
         Text(
             text = "توضیحات",
-            style = MaterialTheme.typography.titleLarge,
+            style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.SemiBold,
             color = Color.Black,
-            modifier = Modifier.padding(vertical = 5.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 5.dp)
+        )
+        Text(
+            text = "این لباس با استفاده از بهترین متریال تهیه شده و طراحی آن مناسب استفاده روزمره و مجالس نیمه\u200Cرسمی است. ترکیب رنگی جذاب و دوخت دقیق، جلوه\u200Cای خاص به آن بخشیده است. پارچه نرم و تنفس\u200Cپذیر آن باعث راحتی بیشتر در طول روز می\u200Cشود. همچنین فرم استاندارد آن با انواع اندام\u200Cها هماهنگی دارد. اگر به دنبال لباسی شیک، ساده و با کیفیت هستید، این محصول گزینه\u200Cای عالی برای شماست.",
+            style = MaterialTheme.typography.bodyMedium,
+            color = Color.Black,
         )
 
     }
@@ -160,16 +91,37 @@ private fun DescriptionSection() {
 
 @Composable
 private fun FeatureSection() {
+    val productFeatures = listOf(
+        "جنس: نخ پنبه با کیفیت بالا",
+        "وزن خالص: ۵۵۰ گرم",
+        "مناسب فصل: بهار و تابستان",
+        "قابل شست‌وشو با ماشین لباسشویی",
+        "موجود در سایزهای ۳۶ تا ۴۴",
+        "دارای تن‌خور راحت و آزاد",
+        "رنگ‌بندی متنوع و جذاب",
+        "مناسب استفاده روزمره و نیمه‌رسمی"
+    )
+
     Column(
         modifier = Modifier.fillMaxWidth()
     ) {
         Text(
             text = "ویژگی ها",
-            style = MaterialTheme.typography.titleLarge,
+            style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.SemiBold,
             color = Color.Black,
-            modifier = Modifier.padding(vertical = 5.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 5.dp)
         )
+        productFeatures.forEach {
+            Text(
+                text = "• $it",
+                style = MaterialTheme.typography.bodyMedium,
+                color = Color.Black,
+                modifier = Modifier.padding(vertical = 5.dp)
+            )
+        }
 
     }
 
@@ -201,7 +153,6 @@ private fun CommentsSection() {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 5.dp)
-                .background(Color.White)
         )
         repeat(fakeComments.size) { index ->
             Column(
@@ -211,7 +162,8 @@ private fun CommentsSection() {
                     .padding(8.dp)
             ) {
                 Row(
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
                         .padding(vertical = 8.dp),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
@@ -224,7 +176,7 @@ private fun CommentsSection() {
                     )
                     Row(
                         verticalAlignment = Alignment.CenterVertically
-                    )  {
+                    ) {
                         Text(
                             text = fakeComments[index].rating.toString().byLocate(),
                             style = MaterialTheme.typography.bodyMedium,
@@ -248,6 +200,37 @@ private fun CommentsSection() {
             }
 
         }
+    }
+
+}
+
+@Composable
+private fun SimilarProductsSection() {
+
+    Column(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Text(
+            text = "محصولات مشابه",
+            style = MaterialTheme.typography.titleMedium,
+            fontWeight = FontWeight.SemiBold,
+            color = Color.Black,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 5.dp)
+        )
+        Text(
+            text = "🥲 محصول مشابهی در حال حاضر موجود نیست، به‌زودی اگر موجود شد خبرتون می‌کنیم!",
+            style = MaterialTheme.typography.bodyMedium,
+            color = Color.Gray,
+            fontWeight = FontWeight.SemiBold,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp),
+            textAlign = TextAlign.Center
+        )
+
+
     }
 
 }

@@ -7,11 +7,14 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -58,6 +61,15 @@ fun ProductDetailScreen(
         image=image,
         rating=rating,
     )
+    val tabNames = listOf(
+        "توضیحات",
+        "ویژگی ها",
+        "نظرات",
+        "محصولات مشابه",
+    )
+
+    val pagerState = rememberPagerState { tabNames.size }
+
     with(sharedTransitionScope) {
         Scaffold(
             containerColor = Color(0xffEBEBEB)
@@ -65,8 +77,7 @@ fun ProductDetailScreen(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(innerPadding)
-                    .verticalScroll(rememberScrollState()),
+                    .padding(innerPadding),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Spacer(Modifier.height(15.dp))
@@ -103,31 +114,42 @@ fun ProductDetailScreen(
                         )
                     }
                 }
-
                 ProductDetailHeaderSection(
-                    modifier = Modifier.align(Alignment.End),
+                    modifier =Modifier.align(Alignment.End) ,
                     product = singleProduct,
                     mainViewModel = mainViewModel
                 )
-                Column(
+                LazyColumn (
                     modifier = Modifier
-                        .fillMaxSize()
                         .background(Color.White)
-                        .padding(horizontal = 12.dp)
+                        .fillMaxSize(),
+                    contentPadding = PaddingValues(horizontal = 12.dp),
+                    horizontalAlignment = Alignment.End
                 ) {
-                    Spacer(Modifier.height(25.dp))
-                    Text(
-                        text =title,
-                        style = MaterialTheme.typography.titleLarge,
-                        fontWeight = FontWeight.Bold,
-                        color = Color.Black,
-                        modifier = Modifier.fillMaxWidth().sharedElement(
-                            sharedContentState = sharedTransitionScope.rememberSharedContentState(key = "text-${title}"),
-                            animatedVisibilityScope =animatedContentScope
+                    item { Spacer(Modifier.height(25.dp)) }
+                    item {
+                        Text(
+                            text =title,
+                            style = MaterialTheme.typography.titleLarge,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.Black,
+                            modifier = Modifier.fillMaxWidth().sharedElement(
+                                sharedContentState = sharedTransitionScope.rememberSharedContentState(key = "text-${title}"),
+                                animatedVisibilityScope =animatedContentScope
+                            )
+                                .background(Color.White)
                         )
-                    )
-                    PagerInfoProduct()
-
+                    }
+                    stickyHeader {
+                        TabsIndicator(
+                            pagerState = pagerState,
+                            tabs = tabNames
+                        )
+                    }
+                    item { PagerInfoProduct(
+                        pagerState = pagerState,
+                        tabNames = tabNames
+                    ) }
                 }
             }
 
