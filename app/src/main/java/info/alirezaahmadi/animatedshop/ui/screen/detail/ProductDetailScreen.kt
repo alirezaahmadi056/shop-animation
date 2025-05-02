@@ -43,7 +43,6 @@ fun ProductDetailScreen(
     navHostController: NavHostController,
     id: Int,
     title: String,
-    description: String,
     price: Long,
     discountPercent: Int,
     image: Int,
@@ -55,7 +54,6 @@ fun ProductDetailScreen(
     val singleProduct =Product(
         id =id,
         title= title,
-        description=description,
         price= price,
         discountPercent= discountPercent,
         image=image,
@@ -133,7 +131,7 @@ fun ProductDetailScreen(
                             style = MaterialTheme.typography.titleLarge,
                             fontWeight = FontWeight.Bold,
                             color = Color.Black,
-                            modifier = Modifier.fillMaxWidth().sharedElement(
+                            modifier = Modifier.fillMaxWidth().align(Alignment.End).sharedElement(
                                 sharedContentState = sharedTransitionScope.rememberSharedContentState(key = "text-${title}"),
                                 animatedVisibilityScope =animatedContentScope
                             )

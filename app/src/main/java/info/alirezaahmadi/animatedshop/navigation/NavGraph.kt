@@ -43,7 +43,6 @@ fun NavGraph(
                     id =args.id,
                     image = args.image,
                     title = args.title,
-                    description = args.description,
                     price = args.price,
                     rating = args.rating,
                     discountPercent = args.discountPercent,
