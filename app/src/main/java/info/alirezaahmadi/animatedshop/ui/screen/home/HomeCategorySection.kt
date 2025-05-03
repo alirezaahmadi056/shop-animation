@@ -31,11 +31,12 @@ import info.alirezaahmadi.animatedshop.data.model.Category
 
 @Composable
 fun HomeCategorySection(
-    categoryList: List<Category>
+    categoryList: List<Category>,
+    onSelectedCategoryIndex: (Int) -> Unit
 ) {
     Text(
         text = "دسته بندی",
-        modifier = Modifier.padding( 12.dp),
+        modifier = Modifier.padding(12.dp),
         color = Color.Black,
         style = MaterialTheme.typography.titleLarge,
         fontWeight = FontWeight.Bold
@@ -45,10 +46,11 @@ fun HomeCategorySection(
         maxItemsInEachRow = 3,
         horizontalArrangement = Arrangement.Center
     ) {
-        categoryList.forEach { category ->
+        categoryList.forEachIndexed { index, category ->
             HomeCategoryItemCard(
                 categoryIcon = category.icon,
-                categoryName = category.title
+                categoryName = category.title,
+                onClick = {onSelectedCategoryIndex(index)}
             )
 
         }
@@ -59,14 +61,15 @@ fun HomeCategorySection(
 fun HomeCategoryItemCard(
     @DrawableRes categoryIcon: Int,
     categoryName: String,
+    onClick: () -> Unit
 ) {
     Column(
         modifier = Modifier
-            .fillMaxWidth(0.95f/3)
+            .fillMaxWidth(0.95f / 3)
             .padding(8.dp)
             .clip(RoundedCornerShape(12.dp))
             .background(Color.White)
-            .clickable { }
+            .clickable(onClick =onClick)
             .padding(8.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
