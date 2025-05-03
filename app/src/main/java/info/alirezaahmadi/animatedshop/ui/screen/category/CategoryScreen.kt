@@ -36,12 +36,13 @@ import info.alirezaahmadi.animatedshop.viewModel.MainViewModel
 @Composable
 fun CategoryScreen(
     navHostController: NavHostController,
+    selectedTabIndex:Int,
     sharedTransitionScope: SharedTransitionScope,
     animatedContentScope: AnimatedContentScope,
     mainViewModel: MainViewModel
 ) {
     val allCategory by mainViewModel.allCategory.collectAsState()
-    val pagerState = rememberPagerState(3) { allCategory.size }
+    val pagerState = rememberPagerState(selectedTabIndex) { allCategory.size }
     Scaffold(
         topBar = {
             CategoryTabsSection(

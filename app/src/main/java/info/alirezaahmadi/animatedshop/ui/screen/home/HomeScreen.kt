@@ -39,19 +39,23 @@ fun HomeScreen(
     animatedContentScope: AnimatedContentScope,
     mainViewModel: MainViewModel
 ) {
-   val allCategory by mainViewModel.allCategory.collectAsState()
+    val allCategory by mainViewModel.allCategory.collectAsState()
     LazyColumn(
         modifier = Modifier.fillMaxSize()
     ) {
         item { SliderSection() }
-        item{ Spacer(Modifier.height(15.dp)) }
-        item { HomeCategorySection(categoryList = allCategory)  }
+        item { Spacer(Modifier.height(15.dp)) }
+        item {
+            HomeCategorySection(categoryList = allCategory) { index ->
+                navHostController.navigate(Routes.CategoryScreen(index))
+            }
+        }
         item {
             LazyRow {
-                items(allCategory[0].products){
+                items(allCategory[0].products) {
                     ProductItemCard(
                         product = it,
-                        navHostController=navHostController,
+                        navHostController = navHostController,
                         sharedTransitionScope = sharedTransitionScope,
                         animatedContentScope = animatedContentScope
                     )

@@ -38,7 +38,7 @@ fun BottomNavigation(
         ),
         NavigationItem(
             name = "دسته بندی",
-            routes = Routes.CategoryScreen,
+            routes = Routes.CategoryScreen(),
             icon = R.drawable.category_nav
         ),
         NavigationItem(
