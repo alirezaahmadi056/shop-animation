@@ -19,7 +19,7 @@ sealed interface Routes {
     ) : Routes
 
     @Serializable
-    data object CategoryScreen : Routes
+    data class CategoryScreen(val selectedIndex:Int=0) : Routes
 
     @Serializable
     data object ShoppingCartScreen : Routes

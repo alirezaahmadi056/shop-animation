@@ -52,8 +52,10 @@ fun NavGraph(
                 )
             }
             composable<Routes.CategoryScreen> {
+                val args =it.toRoute<Routes.CategoryScreen>()
                 CategoryScreen(
                     navHostController = navHostController,
+                    selectedTabIndex = args.selectedIndex,
                     mainViewModel = mainViewModel,
                     sharedTransitionScope = this@SharedTransitionLayout,
                     animatedContentScope = this@composable
