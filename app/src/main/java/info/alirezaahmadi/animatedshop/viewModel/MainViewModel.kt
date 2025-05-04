@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import info.alirezaahmadi.animatedshop.data.db.entity.FavoriteEntity
 import info.alirezaahmadi.animatedshop.data.db.entity.ShoppingEntity
+import info.alirezaahmadi.animatedshop.data.db.entity.UserEntity
 import info.alirezaahmadi.animatedshop.data.model.Category
 import info.alirezaahmadi.animatedshop.repository.MainRepository
 import kotlinx.coroutines.Dispatchers
@@ -73,9 +74,17 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             repository.deletedFavoriteItem(itemId)
         }
-
     }
 
     fun isFavorite(itemId: Int): Flow<Boolean> = repository.isFavorite(itemId)
     fun getAllFavorite(): Flow<List<FavoriteEntity>> = repository.getAllFavorite()
+
+    //user
+     fun upsertUser(userEntity: UserEntity){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.upsertUser(userEntity)
+        }
+    }
+    fun getUser():Flow<UserEntity?> = repository.getUser()
+
 }

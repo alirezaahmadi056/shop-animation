@@ -2,15 +2,18 @@ package info.alirezaahmadi.animatedshop.repository
 
 import info.alirezaahmadi.animatedshop.data.db.dao.FavoriteDao
 import info.alirezaahmadi.animatedshop.data.db.dao.ShoppingDao
+import info.alirezaahmadi.animatedshop.data.db.dao.UserDao
 import info.alirezaahmadi.animatedshop.data.db.entity.FavoriteEntity
 import info.alirezaahmadi.animatedshop.data.db.entity.ShoppingEntity
+import info.alirezaahmadi.animatedshop.data.db.entity.UserEntity
 import info.alirezaahmadi.animatedshop.data.model.Category
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class MainRepository @Inject constructor(
     private val shoppingDao: ShoppingDao,
-    private val favoriteDao: FavoriteDao
+    private val favoriteDao: FavoriteDao,
+    private val userDao: UserDao
 ) {
 
     fun getAllCategory(): List<Category> {
@@ -57,4 +60,11 @@ class MainRepository @Inject constructor(
     fun isFavorite(itemId: Int): Flow<Boolean> =favoriteDao.isFavorite(itemId)
 
     fun getAllFavorite(): Flow<List<FavoriteEntity>> =favoriteDao.getAllFavorite()
+
+    //user
+    suspend fun upsertUser(userEntity: UserEntity){
+        userDao.upsertUser(userEntity)
+    }
+    fun getUser():Flow<UserEntity?> = userDao.getUser()
+
 }
