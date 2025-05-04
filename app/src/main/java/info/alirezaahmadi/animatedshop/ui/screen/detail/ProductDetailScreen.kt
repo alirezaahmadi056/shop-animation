@@ -81,7 +81,8 @@ fun ProductDetailScreen(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(innerPadding),
+                    .padding(innerPadding)
+                    .verticalScroll(rememberScrollState()),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Spacer(Modifier.height(15.dp))
@@ -132,44 +133,39 @@ fun ProductDetailScreen(
                     product = singleProduct,
                     mainViewModel = mainViewModel
                 )
-                LazyColumn(
+                Column(
                     modifier = Modifier
                         .background(Color.White)
-                        .fillMaxSize(),
-                    contentPadding = PaddingValues(horizontal = 12.dp),
+                        .fillMaxSize()
+                        .padding(horizontal = 12.dp),
                     horizontalAlignment = Alignment.End
                 ) {
-                    item { Spacer(Modifier.height(25.dp)) }
-                    item {
-                        Text(
-                            text = title,
-                            style = MaterialTheme.typography.titleLarge,
-                            fontWeight = FontWeight.Bold,
-                            color = Color.Black,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .align(Alignment.End)
-                                .sharedElement(
-                                    sharedContentState = sharedTransitionScope.rememberSharedContentState(
-                                        key = "text-${title}"
-                                    ),
-                                    animatedVisibilityScope = animatedContentScope
-                                )
-                                .background(Color.White)
-                        )
-                    }
-                    stickyHeader {
-                        TabsIndicator(
-                            pagerState = pagerState,
-                            tabs = tabNames
-                        )
-                    }
-                    item {
-                        PagerInfoProduct(
-                            pagerState = pagerState,
-                            tabNames = tabNames
-                        )
-                    }
+                    Spacer(Modifier.height(25.dp))
+                    Text(
+                        text = title,
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Black,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .align(Alignment.End)
+                            .sharedElement(
+                                sharedContentState = sharedTransitionScope.rememberSharedContentState(
+                                    key = "text-${title}"
+                                ),
+                                animatedVisibilityScope = animatedContentScope
+                            )
+                            .background(Color.White)
+                    )
+
+                    TabsIndicator(
+                        pagerState = pagerState,
+                        tabs = tabNames
+                    )
+                    PagerInfoProduct(
+                        pagerState = pagerState,
+                        tabNames = tabNames
+                    )
                 }
             }
 
