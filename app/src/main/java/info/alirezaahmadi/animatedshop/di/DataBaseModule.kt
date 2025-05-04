@@ -10,6 +10,7 @@ import dagger.hilt.components.SingletonComponent
 import info.alirezaahmadi.animatedshop.data.db.AppDatBase
 import info.alirezaahmadi.animatedshop.data.db.dao.FavoriteDao
 import info.alirezaahmadi.animatedshop.data.db.dao.ShoppingDao
+import info.alirezaahmadi.animatedshop.data.db.dao.UserDao
 import info.alirezaahmadi.animatedshop.data.db.entity.UserEntity
 import javax.inject.Singleton
 
@@ -42,8 +43,8 @@ object DataBaseModule {
     }
     @Provides
     @Singleton
-    fun provideUserDaoDao(appDatBase: AppDatBase): UserEntity {
-        return appDatBase.UserEntity()
+    fun provideUserDaoDao(appDatBase: AppDatBase): UserDao {
+        return appDatBase.UserDao()
     }
 
 

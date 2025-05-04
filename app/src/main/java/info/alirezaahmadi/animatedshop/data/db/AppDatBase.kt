@@ -14,5 +14,5 @@ abstract class AppDatBase : RoomDatabase() {
 
     abstract fun ShoppingDao(): ShoppingDao
     abstract fun FavoriteDao(): FavoriteDao
-    abstract fun UserEntity(): UserEntity
+    abstract fun UserDao():UserDao
 }
