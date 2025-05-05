@@ -67,6 +67,7 @@ fun ProfileScreen(
         ProfileItems(
             name = "علاقه مندی های من",
             icon = R.drawable.shopping_cart3,
+            onClickRoute = Routes.FavoriteScreen
         ),
         ProfileItems(
             name = "آدرس های من",
