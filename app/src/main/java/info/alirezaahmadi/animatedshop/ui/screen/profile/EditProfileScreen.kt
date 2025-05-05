@@ -47,7 +47,9 @@ fun EditProfileScreen(
             .background(Color.Transparent)
             .verticalScroll(rememberScrollState())
     ) {
-        ProfileHeader()
+        ProfileHeader(
+            mainViewModel = mainViewModel
+        )
         // نام و نام خانوادگی
         TextLabel("نام و نام خانوادگی:")
         CustomTextField(

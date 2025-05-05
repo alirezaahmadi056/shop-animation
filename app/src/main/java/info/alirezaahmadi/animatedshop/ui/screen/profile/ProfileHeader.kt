@@ -14,6 +14,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -25,14 +26,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import info.alirezaahmadi.animatedshop.R
 import info.alirezaahmadi.animatedshop.util.byLocate
+import info.alirezaahmadi.animatedshop.viewModel.MainViewModel
 
 @Composable
 fun ProfileHeader(
-    name: String?=null,
-    phone: String?=null,
+    mainViewModel: MainViewModel,
     editIcon: (@Composable () -> Unit)? = null,
     changeProfileIcon: (@Composable () -> Unit)? = null,
 ) {
+    val user = mainViewModel.getUser().collectAsState(null)
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -67,13 +70,13 @@ fun ProfileHeader(
             editIcon?.invoke()
         }
         Text(
-            text = name ?: "کاربر فروشگاه",
+            text = user.value?.name ?: "کاربر فروشگاه",
             style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.SemiBold,
             color = Color.White
         )
         Text(
-            text = phone ?: "09159150915".byLocate(),
+            text =user.value?.phone ?: "09159150915".byLocate(),
             style = MaterialTheme.typography.titleMedium,
             color = Color.White
         )

@@ -66,7 +66,7 @@ fun NavGraph(
                 ShoppingCartScreen(navHostController,mainViewModel)
             }
             composable<Routes.ProfileScreen> {
-                ProfileScreen(navHostController)
+                ProfileScreen(navHostController,mainViewModel)
             }
             composable<Routes.EditProfileScreen> {
                 EditProfileScreen(navHostController,mainViewModel)
