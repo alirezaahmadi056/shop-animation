@@ -10,6 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import info.alirezaahmadi.animatedshop.ui.screen.category.CategoryScreen
 import info.alirezaahmadi.animatedshop.ui.screen.detail.ProductDetailScreen
+import info.alirezaahmadi.animatedshop.ui.screen.favorit.FavoriteScreen
 import info.alirezaahmadi.animatedshop.ui.screen.home.HomeScreen
 import info.alirezaahmadi.animatedshop.ui.screen.profile.EditProfileScreen
 import info.alirezaahmadi.animatedshop.ui.screen.profile.ProfileScreen
@@ -70,6 +71,9 @@ fun NavGraph(
             }
             composable<Routes.EditProfileScreen> {
                 EditProfileScreen(navHostController,mainViewModel)
+            }
+            composable<Routes.FavoriteScreen> {
+                FavoriteScreen(mainViewModel)
             }
 
         }
