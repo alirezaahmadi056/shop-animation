@@ -10,14 +10,19 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -27,9 +32,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import info.alirezaahmadi.animatedshop.R
+import info.alirezaahmadi.animatedshop.data.db.entity.UserEntity
 import info.alirezaahmadi.animatedshop.viewModel.MainViewModel
 
 @Composable
@@ -37,10 +46,18 @@ fun EditProfileScreen(
     navHostController: NavHostController,
     mainViewModel: MainViewModel,
 ) {
+    val user by mainViewModel.getUser().collectAsState(null)
+
     var fullName by remember { mutableStateOf("") }
     var phoneNumber by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var gender by remember { mutableStateOf("") }
+    LaunchedEffect(user) {
+        fullName =user?.name?:""
+        phoneNumber =user?.phone?:""
+        email =user?.email?:""
+        gender =user?.gender?:""
+    }
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -48,12 +65,13 @@ fun EditProfileScreen(
             .verticalScroll(rememberScrollState())
     ) {
         ProfileHeader(
-            mainViewModel = mainViewModel
+            mainViewModel = mainViewModel,
         )
         // نام و نام خانوادگی
         TextLabel("نام و نام خانوادگی:")
         CustomTextField(
             value = fullName,
+            keyboardType = KeyboardType.Text,
             hint = "نام و نام خانوادگی خود را وارد کنید",
             onChangeValue = { fullName = it }
         )
@@ -63,6 +81,7 @@ fun EditProfileScreen(
         CustomTextField(
             value = phoneNumber,
             hint = "تلفن خود را وارد کنید",
+            keyboardType = KeyboardType.Phone,
             onChangeValue = { phoneNumber = it }
         )
 
@@ -71,6 +90,7 @@ fun EditProfileScreen(
         CustomTextField(
             value = email,
             hint = "ایمیل خود را وارد کنید",
+            keyboardType = KeyboardType.Email,
             onChangeValue = { email = it }
         )
 
@@ -105,9 +125,19 @@ fun EditProfileScreen(
                 .padding(8.dp)
                 .clip(RoundedCornerShape(12.dp))
                 .background(Brush.linearGradient(listOf(Color(0xffE02508), Color(0xffFE593E))))
-                .clickable {  },
+                .clickable {
+                    mainViewModel.upsertUser(
+                        UserEntity(
+                            email = email,
+                            name = fullName,
+                            phone = phoneNumber,
+                            gender = gender
+                        )
+                    )
+                    navHostController.navigateUp()
+                },
             contentAlignment = Alignment.Center
-        ){
+        ) {
             Text(
                 text = "ثبت تغییرات",
                 style = MaterialTheme.typography.titleMedium,
@@ -123,12 +153,14 @@ fun EditProfileScreen(
 private fun CustomTextField(
     value: String,
     hint: String,
+    keyboardType: KeyboardType,
     onChangeValue: (String) -> Unit
 ) {
 
     TextField(
         value = value,
         onValueChange = onChangeValue,
+        keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
         shape = RoundedCornerShape(12.dp),
         textStyle = MaterialTheme.typography.titleMedium,
         modifier = Modifier
