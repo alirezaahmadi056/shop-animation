@@ -39,15 +39,15 @@ fun AppTopBar(
     navHostController: NavHostController
 ) {
     val backStackEntry = navHostController.currentBackStackEntryAsState()
-    val currentGraph = backStackEntry.value?.destination?.route?.substringAfterLast(".")
+    val currentGraph = backStackEntry.value?.destination?.route?.substringAfterLast(".")?.substringBefore("?")
 
     val navigationRoute = listOf(
         Routes.HomeScreen,
-        Routes.CategoryScreen,
+        Routes.CategoryScreen(),
         Routes.ShoppingCartScreen,
         Routes.ProfileScreen,
     )
-    val showBack = currentGraph !in navigationRoute.map { it.toString() }
+    val showBack = currentGraph !in navigationRoute.map { it::class.simpleName.toString() }
     Row(
         modifier = Modifier
             .fillMaxWidth()

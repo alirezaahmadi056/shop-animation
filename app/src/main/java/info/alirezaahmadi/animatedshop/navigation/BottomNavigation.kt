@@ -1,5 +1,6 @@
 package info.alirezaahmadi.animatedshop.navigation
 
+import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
@@ -54,10 +55,14 @@ fun BottomNavigation(
 
         )
     val backStackEntry = navHostController.currentBackStackEntryAsState()
-    val currentGraph = backStackEntry.value?.destination?.route?.substringAfterLast(".")
+    val fullRoute = backStackEntry.value?.destination?.route
+    val currentRoute = fullRoute?.substringAfterLast(".")?.substringBefore("?") // فقط اسم ساده
 
-    val isShow =
-        currentGraph in navItem.map { it.routes.toString() }
+    val isShow = navItem.any { it.routes::class.simpleName == currentRoute }
+
+    Log.e("1616", "currentRoute: $currentRoute, isShow: $isShow")
+
+
     VerticalAnimationVisibility(
         isShow = isShow
     ) {
@@ -74,7 +79,7 @@ fun BottomNavigation(
                         selectedTextColor = Color(0xffEF472C),
                         unselectedTextColor = Color.Black
                     ),
-                    selected = currentGraph == nav.routes.toString(),
+                    selected = currentRoute == nav.routes::class.simpleName,
                     icon = {
                         Icon(
                             painter = painterResource(nav.icon),
