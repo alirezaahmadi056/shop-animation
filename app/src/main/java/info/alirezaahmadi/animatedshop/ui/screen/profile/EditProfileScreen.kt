@@ -30,10 +30,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import info.alirezaahmadi.animatedshop.viewModel.MainViewModel
 
 @Composable
 fun EditProfileScreen(
-    navHostController: NavHostController
+    navHostController: NavHostController,
+    mainViewModel: MainViewModel,
 ) {
     var fullName by remember { mutableStateOf("") }
     var phoneNumber by remember { mutableStateOf("") }

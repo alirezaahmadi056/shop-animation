@@ -11,6 +11,7 @@ import androidx.navigation.toRoute
 import info.alirezaahmadi.animatedshop.ui.screen.category.CategoryScreen
 import info.alirezaahmadi.animatedshop.ui.screen.detail.ProductDetailScreen
 import info.alirezaahmadi.animatedshop.ui.screen.home.HomeScreen
+import info.alirezaahmadi.animatedshop.ui.screen.profile.EditProfileScreen
 import info.alirezaahmadi.animatedshop.ui.screen.profile.ProfileScreen
 import info.alirezaahmadi.animatedshop.ui.screen.shoping.ShoppingCartScreen
 import info.alirezaahmadi.animatedshop.viewModel.MainViewModel
@@ -66,6 +67,9 @@ fun NavGraph(
             }
             composable<Routes.ProfileScreen> {
                 ProfileScreen(navHostController)
+            }
+            composable<Routes.EditProfileScreen> {
+                EditProfileScreen(navHostController,mainViewModel)
             }
 
         }
