@@ -72,7 +72,7 @@ fun CategoryScreen(
                 }
                 item {
                     LazyRow(modifier = Modifier.fillMaxWidth()) {
-                        items(allCategory[page].products.reversed()) {
+                        items(allCategory[page].products.reversed(), key = {it.id}) {
                             ProductItemCard(
                                 product = it,
                                 navHostController = navHostController,
@@ -83,19 +83,6 @@ fun CategoryScreen(
                     }
                 }
                 item { BestSellerProductTopSection()}
-                item {
-                    LazyRow(modifier = Modifier.fillMaxWidth()) {
-                        items(allCategory[page].products) {
-                            ProductItemCard(
-                                product = it,
-                                navHostController = navHostController,
-                                sharedTransitionScope = sharedTransitionScope,
-                                animatedContentScope = animatedContentScope
-                            )
-                        }
-                    }
-                }
-
             }
         }
     }
