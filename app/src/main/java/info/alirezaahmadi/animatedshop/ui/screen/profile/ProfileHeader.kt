@@ -6,14 +6,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -27,10 +24,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import info.alirezaahmadi.animatedshop.R
+import info.alirezaahmadi.animatedshop.util.byLocate
 
 @Composable
 fun ProfileHeader(
-
+    name: String?=null,
+    phone: String?=null,
+    editIcon: (@Composable () -> Unit)? = null,
+    changeProfileIcon: (@Composable () -> Unit)? = null,
 ) {
     Column(
         modifier = Modifier
@@ -39,7 +40,7 @@ fun ProfileHeader(
             .background(Brush.linearGradient(listOf(Color(0xffE32A0D), Color(0xffFD937F))))
             .padding(15.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(15.dp)
+        verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         Text(
             text = "پروفایل کاربری",
@@ -49,47 +50,33 @@ fun ProfileHeader(
             modifier = Modifier.padding(top = 12.dp)
         )
         Row(
+            modifier = Modifier.padding(vertical = 5.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(30.dp)
         ) {
-            Box(
-                modifier = Modifier
-                    .clip(CircleShape)
-                    .background(Color.LightGray.copy(0.4f))
-               ,
-                contentAlignment = Alignment.Center
-            ) {
-                Icon(
-                    painter = painterResource(R.drawable.ic_photo),
-                    contentDescription = "",
-                    modifier = Modifier.padding(6.dp),
-                    tint = Color.White
-                )
-            }
-
-            Box{
+            changeProfileIcon?.invoke()
+            Box {
                 Image(
                     painter = painterResource(R.drawable.polo_shirt),
                     contentDescription = "",
-                    modifier = Modifier.size(80.dp)
+                    modifier = Modifier
+                        .size(80.dp)
                         .clip(CircleShape)
                 )
             }
-            Box(
-                modifier = Modifier
-                    .clip(CircleShape)
-                    .background(Color.LightGray.copy(0.4f))
-                ,
-                contentAlignment = Alignment.Center
-            ) {
-                Icon(
-                    painter = painterResource(R.drawable.ic_edit),
-                    contentDescription = "",
-                    modifier = Modifier.padding(6.dp),
-                    tint = Color.White
-                )
-            }
-
+            editIcon?.invoke()
         }
+        Text(
+            text = name ?: "کاربر فروشگاه",
+            style = MaterialTheme.typography.titleMedium,
+            fontWeight = FontWeight.SemiBold,
+            color = Color.White
+        )
+        Text(
+            text = phone ?: "09159150915".byLocate(),
+            style = MaterialTheme.typography.titleMedium,
+            color = Color.White
+        )
+
     }
 }
