@@ -66,5 +66,6 @@ class MainRepository @Inject constructor(
         userDao.upsertUser(userEntity)
     }
     fun getUser():Flow<UserEntity?> = userDao.getUser()
+    suspend fun setUserProfile(profile: String){userDao.setUserProfile(profile)}
 
 }
