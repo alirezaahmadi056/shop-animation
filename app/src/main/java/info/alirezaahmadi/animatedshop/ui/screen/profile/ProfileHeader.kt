@@ -1,6 +1,5 @@
 package info.alirezaahmadi.animatedshop.ui.screen.profile
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -11,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,10 +20,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.net.toUri
+import coil.compose.AsyncImage
 import info.alirezaahmadi.animatedshop.R
 import info.alirezaahmadi.animatedshop.util.byLocate
 import info.alirezaahmadi.animatedshop.viewModel.MainViewModel
@@ -57,14 +60,30 @@ fun ProfileHeader(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(30.dp)
         ) {
-            changeProfileIcon?.invoke()
-            Box {
-                Image(
-                    painter = painterResource(R.drawable.polo_shirt),
+                changeProfileIcon?.invoke()
+            Box(
+                modifier = Modifier
+                    .size(100.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator(
+                    progress = {
+                        0.6f
+                    },
+                    modifier = Modifier.size(100.dp),
+                    color = Color.White,
+                    strokeWidth = 4.dp,
+                    trackColor = Color.Transparent,
+                )
+                AsyncImage(
+                    model = user.value?.profile?.toUri(),
                     contentDescription = "",
                     modifier = Modifier
-                        .size(80.dp)
-                        .clip(CircleShape)
+                        .size(90.dp)
+                        .clip(CircleShape),
+                    contentScale = ContentScale.Crop,
+                    placeholder = painterResource(R.drawable.afshari),
+                    error = painterResource(R.drawable.afshari),
                 )
             }
             editIcon?.invoke()
@@ -76,7 +95,7 @@ fun ProfileHeader(
             color = Color.White
         )
         Text(
-            text =user.value?.phone ?: "09159150915".byLocate(),
+            text = user.value?.phone ?: "09159150915".byLocate(),
             style = MaterialTheme.typography.titleMedium,
             color = Color.White
         )

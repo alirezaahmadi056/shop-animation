@@ -131,7 +131,8 @@ fun EditProfileScreen(
                             email = email,
                             name = fullName,
                             phone = phoneNumber,
-                            gender = gender
+                            gender = gender,
+                            profile = user?.profile.toString()
                         )
                     )
                     navHostController.navigateUp()
