@@ -80,11 +80,15 @@ class MainViewModel @Inject constructor(
     fun getAllFavorite(): Flow<List<FavoriteEntity>> = repository.getAllFavorite()
 
     //user
-     fun upsertUser(userEntity: UserEntity){
+    fun upsertUser(userEntity: UserEntity) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.upsertUser(userEntity)
         }
     }
-    fun getUser():Flow<UserEntity?> = repository.getUser()
+
+    fun getUser(): Flow<UserEntity?> = repository.getUser()
+    fun setUserProfile(profile: String) {
+        viewModelScope.launch(Dispatchers.IO) { repository.setUserProfile(profile) }
+    }
 
 }
