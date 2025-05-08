@@ -86,10 +86,11 @@ fun CategoryScreen(
                 }
                 item(key = "product") {
                     LazyRow(modifier = Modifier.fillMaxWidth()) {
-                        items(product, key = { it.id }) {
+                        items(product, key = { it.id }) {product->
                             ProductItemCard(
-                                product = it,
+                                product = product,
                                 navHostController = navHostController,
+                                mainViewModel = mainViewModel,
                                 sharedTransitionScope = sharedTransitionScope,
                                 animatedContentScope = animatedContentScope
                             )
@@ -99,9 +100,10 @@ fun CategoryScreen(
                 item(key = "BestSellerProductTopSection") { BestSellerProductTopSection() }
                 item(key = "bestSellerProduct") {
                     LazyRow(modifier = Modifier.fillMaxWidth()) {
-                        items(bestSellerProduct, key = { it.id }) {
+                        items(bestSellerProduct, key = { it.id }) {product->
                             ProductItemCard(
-                                product = it,
+                                product = product,
+                                mainViewModel = mainViewModel,
                                 navHostController = navHostController,
                                 sharedTransitionScope = sharedTransitionScope,
                                 animatedContentScope = animatedContentScope

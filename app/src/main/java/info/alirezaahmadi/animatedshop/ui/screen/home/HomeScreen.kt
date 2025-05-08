@@ -49,10 +49,11 @@ fun HomeScreen(
         item(key = "BestSellerProductTopSection") { BestSellerProductTopSection() }
         item(key = "homeProduct") {
             LazyRow(modifier = Modifier.fillMaxWidth()) {
-                items(items = homeProduct, key = { it.id }) {
+                items(items = homeProduct, key = { it.id }) {product->
                     ProductItemCard(
-                        product = it,
+                        product = product,
                         navHostController = navHostController,
+                        mainViewModel = mainViewModel,
                         sharedTransitionScope = sharedTransitionScope,
                         animatedContentScope = animatedContentScope
                     )

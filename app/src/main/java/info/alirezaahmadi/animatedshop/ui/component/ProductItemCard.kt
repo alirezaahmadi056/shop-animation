@@ -22,6 +22,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -38,15 +39,18 @@ import info.alirezaahmadi.animatedshop.data.model.Product
 import info.alirezaahmadi.animatedshop.navigation.Routes
 import info.alirezaahmadi.animatedshop.util.byLocate
 import info.alirezaahmadi.animatedshop.util.byLocateAndSeparator
+import info.alirezaahmadi.animatedshop.viewModel.MainViewModel
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun ProductItemCard(
     product: Product,
     navHostController: NavHostController,
+    mainViewModel: MainViewModel,
     sharedTransitionScope: SharedTransitionScope,
     animatedContentScope: AnimatedContentScope,
 ) {
+    val isProductInBasket = mainViewModel.isHaveItemToCart(product.id).collectAsState(false)
     with(sharedTransitionScope) {
         Box(
             modifier = Modifier
@@ -142,20 +146,22 @@ fun ProductItemCard(
 
                 }
             }
-            Box(
-                modifier = Modifier
-                    .align(Alignment.BottomEnd)
-                    .padding(bottom = 37.dp, end = 2.dp)
-                    .clip(CircleShape)
-                    .background(Brush.linearGradient(listOf(Color(0xffFD583D), Color(0xffE32A0D))))
-                    .clickable { },
-            ) {
-                Icon(
-                    imageVector = Icons.Rounded.Add,
-                    contentDescription = "",
-                    tint = Color.White,
-                    modifier = Modifier.padding(4.dp)
-                )
+            if (!isProductInBasket.value){
+                Box(
+                    modifier = Modifier
+                        .align(Alignment.BottomEnd)
+                        .padding(bottom = 37.dp, end = 2.dp)
+                        .clip(CircleShape)
+                        .background(Brush.linearGradient(listOf(Color(0xffFD583D), Color(0xffE32A0D))))
+                        .clickable { mainViewModel.upsertShoppingItem(product.convertToShoppingItem(1)) },
+                ) {
+                    Icon(
+                        imageVector = Icons.Rounded.Add,
+                        contentDescription = "",
+                        tint = Color.White,
+                        modifier = Modifier.padding(4.dp)
+                    )
+                }
             }
             if (product.discountPercent > 0) {
                 Box(
