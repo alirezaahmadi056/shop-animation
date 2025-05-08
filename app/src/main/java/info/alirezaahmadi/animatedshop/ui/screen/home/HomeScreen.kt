@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import info.alirezaahmadi.animatedshop.data.model.Product
 import info.alirezaahmadi.animatedshop.navigation.Routes
+import info.alirezaahmadi.animatedshop.ui.component.BestSellerProductTopSection
 import info.alirezaahmadi.animatedshop.ui.component.ProductItemCard
 import info.alirezaahmadi.animatedshop.viewModel.MainViewModel
 
@@ -38,14 +39,15 @@ fun HomeScreen(
         modifier = Modifier.fillMaxSize(),
         state = lazyListState
     ) {
-        item { SliderSection() }
-        item { Spacer(Modifier.height(15.dp)) }
-        item {
+        item(key = "SliderSection") { SliderSection() }
+        item(key = "Spacer") { Spacer(Modifier.height(8.dp)) }
+        item(key = "HomeCategorySection") {
             HomeCategorySection(categoryList = allCategory) { index ->
                 navHostController.navigate(Routes.CategoryScreen(index))
             }
         }
-        item {
+        item(key = "BestSellerProductTopSection") { BestSellerProductTopSection() }
+        item(key = "homeProduct") {
             LazyRow(modifier = Modifier.fillMaxWidth()) {
                 items(items = homeProduct, key = { it.id }) {
                     ProductItemCard(
