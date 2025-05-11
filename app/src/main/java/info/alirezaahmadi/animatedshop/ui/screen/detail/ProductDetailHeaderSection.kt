@@ -1,5 +1,8 @@
 package info.alirezaahmadi.animatedshop.ui.screen.detail
 
+import android.content.Context
+import android.content.Intent
+import android.widget.Toast
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -25,10 +28,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import info.alirezaahmadi.animatedshop.data.model.Product
 import info.alirezaahmadi.animatedshop.util.byLocate
+import info.alirezaahmadi.animatedshop.util.byLocateAndSeparator
 import info.alirezaahmadi.animatedshop.viewModel.MainViewModel
 
 @Composable
@@ -38,6 +43,7 @@ fun ProductDetailHeaderSection(
     mainViewModel: MainViewModel,
 ) {
     val isHaveFavorite by mainViewModel.isFavorite(itemId = product.id).collectAsState(false)
+    val context = LocalContext.current
     Row(
         modifier = modifier
             .clip(RoundedCornerShape(topStart = 45.dp, topEnd = 22.dp))
@@ -48,7 +54,14 @@ fun ProductDetailHeaderSection(
     ) {
         Spacer(Modifier.width(12.dp))
         IconButton(
-            onClick = {}
+            onClick = {
+                shareProduct(
+                    context = context,
+                    discountPercent = product.discountPercent,
+                    price = product.price,
+                    title = product.title
+                )
+            }
         ) {
             Icon(
                 imageVector = Icons.Outlined.Share,
@@ -98,5 +111,28 @@ fun ProductDetailHeaderSection(
 
         }
 
+    }
+}
+fun shareProduct(context: Context, title: String, price: Long, discountPercent: Int) {
+    val finalPrice = price * (100 - discountPercent) / 100
+    val shareText = """
+        🎉 محصول ویژه برای شما!
+        
+        🛍️ $title
+        💰 قیمت قبل: ${price.toString().byLocateAndSeparator()} تومان
+        🔥 تخفیف: $discountPercent٪
+        ✅ قیمت نهایی: ${finalPrice.toString().byLocateAndSeparator()} تومان
+        
+        الان وقت خریدشه! 😍
+    """.trimIndent()
+
+    val intent = Intent(Intent.ACTION_SEND).apply {
+        type = "text/plain"
+        putExtra(Intent.EXTRA_TEXT, shareText)
+    }
+    try {
+        context.startActivity(Intent.createChooser(intent, "اشتراک‌گذاری محصول با..."))
+    }catch (_: Exception){
+        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
     }
 }
