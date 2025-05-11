@@ -56,10 +56,9 @@ fun BottomNavigation(
         )
     val backStackEntry = navHostController.currentBackStackEntryAsState()
     val fullRoute = backStackEntry.value?.destination?.route
-    val currentRoute = fullRoute?.substringAfterLast(".")?.substringBefore("?") // فقط اسم ساده
-
-    val isShow = navItem.any { it.routes::class.simpleName == currentRoute }
-
+    val currentRoute =
+        fullRoute?.substringAfterLast(".")?.substringBefore("?")// فقط اسم ساده
+    val isShow = navItem.any { it.routes.toString().substringBefore("(") == currentRoute }
     Log.e("1616", "currentRoute: $currentRoute, isShow: $isShow")
 
 
@@ -105,8 +104,9 @@ fun BottomNavigation(
 private fun NavHostController.navigateSingle(routes: Routes) {
     navigate(routes) {
         popUpTo<Routes.HomeScreen> {
-            inclusive = true
+            inclusive = false
         }
+        launchSingleTop =true
     }
 }
 

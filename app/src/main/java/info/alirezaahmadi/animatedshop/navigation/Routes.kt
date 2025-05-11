@@ -1,6 +1,5 @@
 package info.alirezaahmadi.animatedshop.navigation
 
-import info.alirezaahmadi.animatedshop.data.model.Product
 import kotlinx.serialization.Serializable
 
 sealed interface Routes {

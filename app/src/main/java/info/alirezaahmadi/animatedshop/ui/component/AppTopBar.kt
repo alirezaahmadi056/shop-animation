@@ -3,8 +3,6 @@ package info.alirezaahmadi.animatedshop.ui.component
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandHorizontally
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.animation.shrinkHorizontally
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -16,10 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowForward
-import androidx.compose.material.icons.rounded.ArrowForward
 import androidx.compose.material.icons.rounded.Menu
-import androidx.compose.material3.Badge
-import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
@@ -47,7 +42,7 @@ fun AppTopBar(
         Routes.ShoppingCartScreen,
         Routes.ProfileScreen,
     )
-    val showBack = currentGraph !in navigationRoute.map { it::class.simpleName.toString() }
+    val showBack = currentGraph !in navigationRoute.map { it.toString().substringBefore("(") }
     Row(
         modifier = Modifier
             .fillMaxWidth()
