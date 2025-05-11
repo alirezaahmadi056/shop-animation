@@ -2,6 +2,7 @@ package info.alirezaahmadi.animatedshop.navigation
 
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionLayout
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -24,7 +25,9 @@ fun NavGraph(
     navHostController: NavHostController,
     mainViewModel: MainViewModel
 ) {
-    SharedTransitionLayout {
+    SharedTransitionLayout(
+        modifier = Modifier.fillMaxSize(),
+    ) {
         NavHost(
             modifier = modifier,
             navController = navHostController,
