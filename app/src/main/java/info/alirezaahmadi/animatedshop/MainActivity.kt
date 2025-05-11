@@ -42,7 +42,7 @@ class MainActivity : ComponentActivity() {
                         bottomBar = {
                             BottomNavigation(navHostController = navHostController)
                         },
-                        topBar = {AppTopBar(navHostController=navHostController)}
+                        topBar = {AppTopBar(navHostController=navHostController, mainViewModel = mainViewModel)}
                     ) { innerPadding ->
                         NavGraph(
                             mainViewModel = mainViewModel,
