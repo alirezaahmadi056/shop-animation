@@ -134,7 +134,11 @@ fun ProductItemCard(
                             text = discountPrice.toInt().toString().byLocateAndSeparator(),
                             style = MaterialTheme.typography.titleSmall,
                             color = Color.Black,
-                            fontWeight = FontWeight.SemiBold
+                            fontWeight = FontWeight.SemiBold,
+                            modifier = Modifier.sharedElement(
+                                sharedContentState = sharedTransitionScope.rememberSharedContentState(key = "price:${discountPrice.toInt().toString().byLocateAndSeparator()}"),
+                                animatedVisibilityScope = animatedContentScope
+                            )
                         )
                         Text(
                             text = "تومان",
@@ -176,7 +180,7 @@ fun ProductItemCard(
                                     Color(0xffE32A0D)
                                 )
                             )
-                        )
+                        ),
                 ) {
                     Text(
                         text = "${(product.discountPercent).toString().byLocate()}% ",

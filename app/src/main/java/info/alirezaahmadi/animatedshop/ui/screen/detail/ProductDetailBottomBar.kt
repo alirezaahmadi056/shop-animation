@@ -1,7 +1,7 @@
 package info.alirezaahmadi.animatedshop.ui.screen.detail
 
-import android.util.Log
 import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -35,6 +35,7 @@ import info.alirezaahmadi.animatedshop.util.byLocate
 import info.alirezaahmadi.animatedshop.util.byLocateAndSeparator
 import info.alirezaahmadi.animatedshop.viewModel.MainViewModel
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun ProductDetailBottomBar(
     product: Product,
@@ -58,18 +59,21 @@ fun ProductDetailBottomBar(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(
-                text = product.price.toString().byLocateAndSeparator(),
-                style = MaterialTheme.typography.headlineSmall,
-                color = Color.DarkGray,
-                fontWeight = FontWeight.SemiBold,
-                textDecoration = TextDecoration.LineThrough
-            )
+            if (product.discountPercent>1){
+                Text(
+                    text = product.price.toString().byLocateAndSeparator(),
+                    style = MaterialTheme.typography.headlineSmall,
+                    color = Color.DarkGray,
+                    fontWeight = FontWeight.SemiBold,
+                    textDecoration = TextDecoration.LineThrough
+                )
+            }
+
             Text(
                 text = discountPrice.toInt().toString().byLocateAndSeparator() + " تومان",
                 style = MaterialTheme.typography.headlineSmall,
                 color = Color.Black,
-                fontWeight = FontWeight.SemiBold
+                fontWeight = FontWeight.SemiBold,
             )
         }
         Spacer(Modifier.height(8.dp))

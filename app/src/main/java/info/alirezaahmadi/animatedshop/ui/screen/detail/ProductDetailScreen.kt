@@ -148,7 +148,7 @@ fun ProductDetailScreen(
                         color = Color.Black,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .align(Alignment.End)
+                            .align(Alignment.Start)
                             .sharedElement(
                                 sharedContentState = sharedTransitionScope.rememberSharedContentState(
                                     key = "text-${title}"
