@@ -82,7 +82,7 @@ fun DrawerContent(
                 contentScale = ContentScale.Crop
             )
             Text(
-                text = user.value?.name.toString(),
+                text = user.value?.name?:"کاربر فروشگاه",
                 style = MaterialTheme.typography.bodyLarge,
                 fontWeight = FontWeight.SemiBold,
                 color = Color.Black,
@@ -90,7 +90,7 @@ fun DrawerContent(
                 maxLines = 1
             )
             Text(
-                text = user.value?.phone.toString().byLocate(),
+                text = user.value?.phone?:"09159150915".byLocate(),
                 style = MaterialTheme.typography.bodyLarge,
                 color = Color.Black,
                 modifier = Modifier.weight(0.3f),
