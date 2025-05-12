@@ -59,9 +59,6 @@ fun BottomNavigation(
     val currentRoute =
         fullRoute?.substringAfterLast(".")?.substringBefore("?")// فقط اسم ساده
     val isShow = navItem.any { it.routes.toString().substringBefore("(") == currentRoute }
-    Log.e("1616", "currentRoute: $currentRoute, isShow: $isShow")
-
-
     VerticalAnimationVisibility(
         isShow = isShow
     ) {
@@ -78,7 +75,7 @@ fun BottomNavigation(
                         selectedTextColor = Color(0xffEF472C),
                         unselectedTextColor = Color.Black
                     ),
-                    selected = currentRoute == nav.routes::class.simpleName,
+                    selected = currentRoute == nav.routes.toString().substringBefore("(") ,
                     icon = {
                         Icon(
                             painter = painterResource(nav.icon),
