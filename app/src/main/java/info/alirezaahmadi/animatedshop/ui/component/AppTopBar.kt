@@ -39,6 +39,7 @@ import info.alirezaahmadi.animatedshop.viewModel.MainViewModel
 fun AppTopBar(
     navHostController: NavHostController,
     mainViewModel: MainViewModel,
+    openDrawer:()-> Unit,
 ) {
     val user = mainViewModel.getUser().collectAsState(null)
     val backStackEntry = navHostController.currentBackStackEntryAsState()
@@ -63,7 +64,7 @@ fun AppTopBar(
         Row(
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            IconButton(onClick = {}) {
+            IconButton(onClick = openDrawer) {
                 Icon(
                     imageVector = Icons.Rounded.Menu,
                     contentDescription = "",
