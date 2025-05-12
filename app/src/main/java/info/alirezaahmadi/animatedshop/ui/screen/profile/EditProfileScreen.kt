@@ -33,8 +33,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.PlatformTextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextDirection
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import info.alirezaahmadi.animatedshop.R
@@ -71,6 +74,7 @@ fun EditProfileScreen(
         TextLabel("نام و نام خانوادگی:")
         CustomTextField(
             value = fullName,
+            maxLength = 30,
             keyboardType = KeyboardType.Text,
             hint = "نام و نام خانوادگی خود را وارد کنید",
             onChangeValue = { fullName = it }
@@ -82,6 +86,8 @@ fun EditProfileScreen(
             value = phoneNumber,
             hint = "تلفن خود را وارد کنید",
             keyboardType = KeyboardType.Phone,
+            maxLength = 11,
+            textDirection = TextDirection.Ltr,
             onChangeValue = { phoneNumber = it }
         )
 
@@ -155,15 +161,23 @@ private fun CustomTextField(
     value: String,
     hint: String,
     keyboardType: KeyboardType,
-    onChangeValue: (String) -> Unit
+    onChangeValue: (String) -> Unit,
+    textDirection: TextDirection = TextDirection.Rtl,
+    maxLength: Int = Int.MAX_VALUE
 ) {
-
     TextField(
-        value = value,
-        onValueChange = onChangeValue,
+        value = value.take(maxLength),
+        onValueChange = {
+            if (it.length <= maxLength) {
+                onChangeValue(it)
+            }
+        },
         keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
         shape = RoundedCornerShape(12.dp),
-        textStyle = MaterialTheme.typography.titleMedium,
+        textStyle = MaterialTheme.typography.titleMedium.copy(
+            platformStyle = PlatformTextStyle(includeFontPadding = false),
+            textDirection = textDirection
+        ),
         modifier = Modifier
             .imePadding()
             .fillMaxWidth()
@@ -188,6 +202,7 @@ private fun CustomTextField(
         )
     )
 }
+
 
 @Composable
 private fun TextLabel(text: String) {
