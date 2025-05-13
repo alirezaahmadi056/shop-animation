@@ -4,9 +4,9 @@ Built with **Jetpack Compose** and **Material 3**, the app follows the **MVVM ar
 With the power of **Hilt**, **Room Database**, and **Glide**, it provides a seamless product browsing and cart management experience.  
 A key feature of the app is the use of **Shared Transition Layout** to deliver beautiful and smooth animations between screens.
 
-**Download 🚀**
 
-<a href='https://github.com/alirezaahmadi056/shop-animation/releases/download/V1.0.0.0/app-release.apk'></a>
+
+[**Download 🚀**](https://github.com/alirezaahmadi056/shop-animation/releases/download/V1.0.0.0/app-release.apk)
 
 ## Features
 - Single Activity architecture  
@@ -29,7 +29,7 @@ A key feature of the app is the use of **Shared Transition Layout** to deliver b
 
 ## 🎥 Demo Video
 
-[![Watch the Demo Video](assests/VID_20250513_104608_313.mp4)
+[![Watch the Demo Video](assests/1747121035570.mp4)
 
 ## 📱 Screenshots
 <table style="width:100%">
