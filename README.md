@@ -6,7 +6,7 @@ A key feature of the app is the use of **Shared Transition Layout** to deliver b
 
 **Download 🚀**
 
-<a href='https://cafebazaar.ir/app/info.alirezaahmadi.taskmanager'><img height=40 alt='Download Now' src="assest/cafebazzar.png"/></a>
+<a href='https://github.com/alirezaahmadi056/shop-animation/releases/download/V1.0.0.0/app-release.apk'></a>
 
 ## Features
 - Single Activity architecture  
@@ -29,7 +29,7 @@ A key feature of the app is the use of **Shared Transition Layout** to deliver b
 
 ## 🎥 Demo Video
 
-[![Watch the Demo Video](assests/VID_20250513_102725_193.mp4)
+[![Watch the Demo Video](assests/VID_20250513_104608_313.mp4)
 
 ## 📱 Screenshots
 <table style="width:100%">
