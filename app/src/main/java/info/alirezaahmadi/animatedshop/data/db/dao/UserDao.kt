@@ -13,6 +13,6 @@ interface UserDao {
 
     @Query("select * from userentity where id=0")
     fun getUser(): Flow<UserEntity?>
-    @Query("update UserEntity set profile=:profile")
+    @Query("update UserEntity set profile=:profile where id=0")
     suspend fun setUserProfile(profile: String)
 }
