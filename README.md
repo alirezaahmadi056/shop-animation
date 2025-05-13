@@ -4,7 +4,7 @@ Built with **Jetpack Compose** and **Material 3**, the app follows the **MVVM ar
 With the power of **Hilt**, **Room Database**, and **Glide**, it provides a seamless product browsing and cart management experience.  
 A key feature of the app is the use of **Shared Transition Layout** to deliver beautiful and smooth animations between screens.
 
-**Download Now 🚀**
+**Download 🚀**
 
 <a href='https://cafebazaar.ir/app/info.alirezaahmadi.taskmanager'><img height=40 alt='Download Now' src="assest/cafebazzar.png"/></a>
 
@@ -29,7 +29,7 @@ A key feature of the app is the use of **Shared Transition Layout** to deliver b
 
 ## 🎥 Demo Video
 
-[![Watch the Demo Video](https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg)](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
+[![Watch the Demo Video](assests/VID_20250513_102725_193.mp4)
 
 ## 📱 Screenshots
 <table style="width:100%">
