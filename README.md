@@ -27,9 +27,6 @@ A key feature of the app is the use of **Shared Transition Layout** to deliver b
 | 🌐 Navigation              | [Compose Navigation](https://developer.android.com/jetpack/compose/navigation) |
 | 🎞️ Shared Element Animation| [Shared Transition Layout](https://developer.android.com/develop/ui/compose/animation/shared-elements) |
 
-## 🎥 Demo Video
-
-[![Watch the Demo Video](assests/1747121035570.mp4)
 
 ## 📱 Screenshots
 <table style="width:100%">
