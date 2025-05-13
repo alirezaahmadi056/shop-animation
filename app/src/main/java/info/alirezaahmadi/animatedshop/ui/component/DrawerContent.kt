@@ -37,12 +37,15 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import coil.compose.AsyncImage
+import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
+import com.bumptech.glide.integration.compose.GlideImage
+import com.bumptech.glide.integration.compose.placeholder
 import info.alirezaahmadi.animatedshop.R
 import info.alirezaahmadi.animatedshop.navigation.Routes
 import info.alirezaahmadi.animatedshop.util.byLocate
 import info.alirezaahmadi.animatedshop.viewModel.MainViewModel
 
+@OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun DrawerContent(
     navHostController: NavHostController,
@@ -70,15 +73,14 @@ fun DrawerContent(
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
 
-            AsyncImage(
+            GlideImage(
                 model = user.value?.profile,
                 contentDescription = "",
                 modifier = Modifier
                     .weight(0.15f)
                     .aspectRatio(1f)
                     .clip(CircleShape),
-                error = painterResource(R.drawable.afshari),
-                placeholder = painterResource(R.drawable.afshari),
+                failure = placeholder(R.drawable.afshari),
                 contentScale = ContentScale.Crop
             )
             Text(
@@ -93,6 +95,7 @@ fun DrawerContent(
                 text = user.value?.phone?:"09159150915".byLocate(),
                 style = MaterialTheme.typography.bodyLarge,
                 color = Color.Black,
+                textAlign = TextAlign.End,
                 modifier = Modifier.weight(0.3f),
                 maxLines = 1
             )

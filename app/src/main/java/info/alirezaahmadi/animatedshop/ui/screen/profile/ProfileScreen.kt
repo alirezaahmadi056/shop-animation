@@ -1,6 +1,7 @@
 package info.alirezaahmadi.animatedshop.ui.screen.profile
 
 import android.net.Uri
+import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
@@ -81,7 +82,10 @@ fun ProfileScreen(
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent()
     ) { uri: Uri? ->
-        uri?.let { mainViewModel.setUserProfile(it.toString()) }
+        uri?.let {
+            mainViewModel.setUserProfile(it.toString())
+            Log.e("1515","set profile :${uri.toString()}")
+        }
     }
     Column(
         modifier = Modifier

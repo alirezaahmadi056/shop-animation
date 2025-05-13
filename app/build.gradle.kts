@@ -77,7 +77,7 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
 
-    //coil
-    implementation(libs.coil.compose)
+    //glide
+    implementation(libs.glide.compose)
 
 }

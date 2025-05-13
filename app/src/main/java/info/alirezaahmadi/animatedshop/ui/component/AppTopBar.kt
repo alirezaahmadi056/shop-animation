@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowForward
 import androidx.compose.material.icons.rounded.Menu
@@ -30,11 +29,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import coil.compose.AsyncImage
+import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
+import com.bumptech.glide.integration.compose.GlideImage
+import com.bumptech.glide.integration.compose.placeholder
 import info.alirezaahmadi.animatedshop.R
 import info.alirezaahmadi.animatedshop.navigation.Routes
 import info.alirezaahmadi.animatedshop.viewModel.MainViewModel
 
+@OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun AppTopBar(
     navHostController: NavHostController,
@@ -81,14 +83,13 @@ fun AppTopBar(
 
             }
             IconButton(onClick = {navHostController.navigate(Routes.ProfileScreen)}){
-                AsyncImage(
+                GlideImage(
                     model = user.value?.profile,
                     contentDescription = "",
                     modifier = Modifier
                         .size(36.dp)
                         .clip(CircleShape),
-                    error = painterResource(R.drawable.afshari),
-                   placeholder  = painterResource(R.drawable.afshari),
+                    failure = placeholder( R.drawable.afshari),
                     contentScale = ContentScale.Crop
                 )
             }

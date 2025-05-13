@@ -1,5 +1,6 @@
 package info.alirezaahmadi.animatedshop.ui.screen.profile
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -21,16 +22,17 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.net.toUri
-import coil.compose.AsyncImage
+import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
+import com.bumptech.glide.integration.compose.GlideImage
+import com.bumptech.glide.integration.compose.placeholder
 import info.alirezaahmadi.animatedshop.R
 import info.alirezaahmadi.animatedshop.util.byLocate
 import info.alirezaahmadi.animatedshop.viewModel.MainViewModel
 
+@OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun ProfileHeader(
     mainViewModel: MainViewModel,
@@ -38,6 +40,7 @@ fun ProfileHeader(
     changeProfileIcon: (@Composable () -> Unit)? = null,
 ) {
     val user = mainViewModel.getUser().collectAsState(null)
+    Log.i("1515","profile:${user.value?.profile.toString()}")
 
     Column(
         modifier = Modifier
@@ -75,15 +78,14 @@ fun ProfileHeader(
                     strokeWidth = 4.dp,
                     trackColor = Color.Transparent,
                 )
-                AsyncImage(
-                    model = user.value?.profile?.toUri(),
+                GlideImage(
+                    model = user.value?.profile,
                     contentDescription = "",
                     modifier = Modifier
                         .size(90.dp)
                         .clip(CircleShape),
                     contentScale = ContentScale.Crop,
-                    placeholder = painterResource(R.drawable.afshari),
-                    error = painterResource(R.drawable.afshari),
+                    failure = placeholder(R.drawable.afshari),
                 )
             }
             editIcon?.invoke()
